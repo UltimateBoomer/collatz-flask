@@ -8,7 +8,6 @@ from functools import reduce
 OP_MAP = [' => ', ' -> ']
 
 def collatz_create_seq(n):
-    l = 0
     seq = []
     ops = []
     max_n = n
@@ -16,10 +15,9 @@ def collatz_create_seq(n):
         ops.append(n % 2)
         n = 3 * n + 1 if n % 2 else n // 2
 
-        l += 1
         seq.append(n)
         max_n = max(max_n, n)
-    return (l, seq, ops, max_n)
+    return (seq, ops, max_n)
 
 def collatz_str(n, seq, ops):
     seq_max = max(seq)
@@ -57,12 +55,11 @@ def create_app(test_config=None):
 
     @app.route('/collatz/<int:n>')
     def collatz(n):
-        (l, seq, ops, max_n) = collatz_create_seq(n)
+        (seq, ops, max_n) = collatz_create_seq(n)
         # db.session.add(collatz_seq(n, max_n))
         # db.session.commit()
 
-
         seq_str = collatz_str(n, seq, ops)
-        return render_template('collatz.html', n=n, len=l, seq=seq_str, max_n=max_n, op_map=OP_MAP)
+        return render_template('collatz.html', n=n, len=len(seq), seq=seq_str, max_n=max_n, op_map=OP_MAP)
 
     return app
