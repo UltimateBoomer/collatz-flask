@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{n}}: Collatz</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/base.css') }}"
+    />
+  </head>
+  <body>
+    <h1>{{n}}</h1>
+    <h2>Details</h2>
+    <p><strong>Sequence length</strong>: {{len}}</p>
+    <p><strong>Max value reached</strong>: {{max_n}}</p>
+    <h2>Sequence</h2>
+    <p>{{op_map[0]}}: Even reduction</p>
+    <p>{{op_map[1]}}: Odd reduction</p>
+    <p>{{seq}}</p>
+  </body>
+</html>
